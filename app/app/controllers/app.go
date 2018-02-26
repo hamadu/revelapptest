@@ -45,36 +45,12 @@ func (c App) GenerateUser() revel.Result {
 }
 
 func (c App) User() revel.Result {
-	// for i := 0; i < 1; i++ {
-	// 	DbMap.Insert(&models.User{
-	// 		Id:        0,
-	// 		FirstName: fmt.Sprintf("first%d", i),
-	// 		LastName:  fmt.Sprintf("last%d", i),
-	// 		Password:  "gogo",
-	// 	})
-	// }
-
 	var users []models.User
 	models.DB.Limit(5).Find(&users)
-
-	// var user models.User
-	// models.DB.First(&user)
-
-	// model.DB.Select(&users, "select * from users")
 
 	for _, r := range users {
 		user := r
 		c.Log.Info("%s(%s)", user.FirstName, user.ID)
 	}
-
-	// users := []models.User{}
-
-	// users = append(users, models.User{
-	// 	Id:        1,
-	// 	FirstName: "NAME",
-	// 	LastName:  "SECOND",
-	// 	Password:  "pass",
-	// })
-
 	return c.RenderJSON(users)
 }
